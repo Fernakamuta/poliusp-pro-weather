@@ -35,10 +35,10 @@ def upload_at_gcs(df):
 
     now = datetime.now()
     blob_name = now.strftime("%Y%m%d_%H%M%S") + ".csv"
-    df.to_csv(blob_name)
+    df.to_csv("current_weather.csv")
 
     blob = bucket.blob("weather/" + blob_name)
-    blob.upload_from_filename(blob_name)
+    blob.upload_from_filename("current_weather.csv")
     print("CSV Saved")
 
 

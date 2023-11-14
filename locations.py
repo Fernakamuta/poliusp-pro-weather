@@ -1,13 +1,16 @@
+import os
 import requests
 import pandas as pd
 from google.cloud import storage
+from dotenv import load_dotenv
+load_dotenv()
 
 
-def get_top_cities_weather():
+def get_top_cities_weather(api_key):
     """Makes a request to the accuweather api."""
     accuweather_host = "http://dataservice.accuweather.com/locations/v1/"
     accuweater_top_cities_endpoint = "topcities/50"
-    res = requests.get(url = accuweather_host + accuweater_top_cities_endpoint, params={"apikey": "UyK9spoYGC4nY9tTLAF7NSgXHbIhkSEs"}).json()
+    res = requests.get(url = accuweather_host + accuweater_top_cities_endpoint, params={"apikey": api_key}).json()
     return res
 
 
@@ -45,6 +48,7 @@ if __name__ == "__main__":
     source_file_name = "weather.csv"
     destination_blob_name = "weather/weather.csv"
 
+    accuweather_key = os.getenv('ACCUWEATHER_KEY')
 
     weather_res = get_top_cities_weather()
     weather_df = parse_dataframe(weather_res)

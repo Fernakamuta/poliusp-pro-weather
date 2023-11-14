@@ -73,4 +73,4 @@ while True:
     df_weather = pd.DataFrame(weather_data)
     print(df_weather.shape)
     upload_at_gcs(df_weather)
-    time.sleep(0.1 * 60)  # x is the number of minutes
+    time.sleep(1 * 60)  # x is the number of minutes
